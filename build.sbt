@@ -23,6 +23,16 @@ libraryDependencies ++= Seq(
 
 testFrameworks += new TestFramework("utest.runner.Framework")
 
+scalaJSUseMainModuleInitializer := true
 jsEnv := new org.scalajs.jsenv.jsdomnodejs.JSDOMNodeJSEnv
 
 lazy val `scalatags-rx` = project in file(".") enablePlugins ScalaJSPlugin
+
+scalacOptions ++= Seq(
+  "-deprecation",
+  "-feature",
+  "-language:implicitConversions",
+  "-language:higherKinds",
+  "-Ypartial-unification",
+  "-Xfatal-warnings"
+)

@@ -12,6 +12,10 @@ src_managed/
 project/boot/
 project/plugins/project/
 
+# Node.js specific
+node_modules/
+package-lock.json
+
 # Scala-IDE specific
 .scala_dependencies
 .worksheet

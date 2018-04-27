@@ -7,27 +7,26 @@ import org.scalajs.dom.Element
 import org.scalajs.dom.ext._
 import org.scalajs.dom.raw.{Comment, Node}
 import rx._
+import scalatags.JsDom.all._
 
 import scala.collection.immutable
 import scala.collection.immutable.Iterable
 import scala.language.implicitConversions
-import scalatags.JsDom.all._
 
 trait RxNodeInstances {
 
   implicit class rxStringFrag(v: Rx[String])(implicit ctx: Ctx.Owner) extends Frag {
     def render: dom.Text = {
       val node = dom.document.createTextNode(v.now)
-      v foreach { s => node.replaceData(0, node.length, s)}
+      v foreach { s => node.replaceData(0, node.length, s) }
       node
     }
-    def applyTo(t: Element) = {
-      t.appendChild(render)
-    }
+
+    def applyTo(t: Element): Unit = t.appendChild(render)
   }
 
   implicit class bindRxElement[T <: dom.Element](rx: Rx[T])(implicit ctx: Ctx.Owner) extends Modifier {
-    def applyTo(container: Element) = {
+    def applyTo(container: Element): Unit = {
       val atomicReference = new AtomicReference(rx.now)
       container.appendChild(atomicReference.get())
       rx.triggerLater {
@@ -40,7 +39,7 @@ trait RxNodeInstances {
   }
 
   implicit class bindRxElements(e: Rx[immutable.Iterable[Element]])(implicit ctx: Ctx.Owner) extends Modifier {
-    def applyTo(t: Element) = {
+    def applyTo(t: Element): Unit = {
       val nonEmpty: Rx[Iterable[Node]] = e.map { t => if (t.isEmpty) List(new Comment) else t }
       val fragments = new AtomicReference(nonEmpty.now)
       nonEmpty.now foreach t.appendChild

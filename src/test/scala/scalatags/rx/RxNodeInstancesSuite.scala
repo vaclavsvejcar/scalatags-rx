@@ -2,15 +2,14 @@ package scalatags.rx
 
 import org.scalajs.dom.Element
 import rx._
-import utest._
-
 import scalatags.JsDom.all._
 import scalatags.rx.TestUtils._
 import scalatags.rx.all._
+import utest._
 
 object RxNodeInstancesSuite extends TestSuite {
 
-  val tests = TestSuite {
+  val tests = Tests {
     "text node" - {
       val c = Var("a")
       "Var" - {

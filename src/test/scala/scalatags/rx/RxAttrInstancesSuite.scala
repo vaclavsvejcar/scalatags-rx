@@ -1,15 +1,14 @@
 package scalatags.rx
 
 import rx._
-import utest._
-
 import scalatags.JsDom.all._
 import scalatags.rx.TestUtils._
 import scalatags.rx.all._
+import utest._
 
 object RxAttrInstancesSuite extends TestSuite {
 
-  val tests = TestSuite {
+  val tests = Tests {
     "string attribute" - {
       val c = Var("10px")
       "Var" - {

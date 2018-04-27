@@ -1,16 +1,13 @@
 package scalatags.rx
 
 import org.scalajs.dom.document
+import rx.Ctx.Owner.Unsafe._
 import rx._
-
-import scala.scalajs.js.JSApp
-import scala.scalajs.js.annotation.JSExport
 import scalatags.JsDom.all._
 import scalatags.rx.all._
 
-import rx.Ctx.Owner.Unsafe._
 
-object Example extends JSApp {
+object Example {
 
   val c = Var("blue")
   val text = Rx(s"It is a ${c()} text!")
@@ -19,7 +16,7 @@ object Example extends JSApp {
     c() = if (c.now == "blue") "green" else "blue"
   }
 
-  override def main(): Unit = {
+  def main(args: Array[String]): Unit = {
     document.body.appendChild(
       div(
         color := c, onclick := toggle _,
