@@ -34,6 +34,7 @@ trait RxNodeInstances {
         val current = rx.now
         val previous = atomicReference.getAndSet(current)
         container.replaceChild(current, previous)
+        ()
       }
     }
   }
